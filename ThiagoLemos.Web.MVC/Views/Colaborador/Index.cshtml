@@ -1,0 +1,88 @@
+﻿@model List<ThiagoLemos.Web.MVC.Models.ColaboradorViewModel>
+
+@{
+    ViewBag.Title = "Colaboradores";
+}
+
+
+
+<h2 class="sub-header">@ViewBag.Title</h2>
+
+@{
+    if (!string.IsNullOrEmpty((string)TempData["Error"]))
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    if (!string.IsNullOrEmpty((string)TempData["Success"]))
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+}
+
+<div class="form-group">
+    <a href="@Url.Action("Create")"><button type="button" class="btn btn-primary">Novo</button></a>
+</div>
+
+<div class="container">
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr class="row">
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.First().PessoaId)
+                </th>
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.First().EmpresaId)
+                </th>
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.First().Cargo)
+                </th>
+                <th class="col-md-1">
+                    @Html.DisplayNameFor(model => model.First().Salario)
+                </th>
+                <th class="col-md-1">
+                    @Html.DisplayNameFor(model => model.First().Status)
+                </th>
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.First().DataDemissao)
+                </th>
+                <th class="col-md-2">
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr class="row">
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                    </td>
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                    </td>
+                    <td class="col-md-2" for="Cargo">
+                        @Html.DisplayFor(modelItem => item.Cargo)
+                    </td>
+                    <td class="col-md-1" for="Cargo">
+                        @Html.DisplayFor(modelItem => item.Salario)
+                    </td>
+                    <td class="col-md-1" for="Status">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td class="col-md-2" for="Cargo">
+                        @Html.DisplayFor(modelItem => item.DataDemissao)
+                    </td>
+
+                    <td class="col-md-2">
+                        <a href="@Url.Action("Edit", new { id = item.Id })"><img src="../../Images/edit.png" title="Editar" /></a>
+                        <a href="@Url.Action("Delete", new {id = item.Id})" onclick=" return confirm('Deseja excluir o registro?'); "><img src="../../Images/delete.png" title="Excluir"/></a>
+                        <a href="@Url.Action("Demitir", new { id = item.Id })" onclick=" return confirm('Deseja demitir o funcionário?'); "><img src="../../Images/quit.png" title="Demitir" /></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

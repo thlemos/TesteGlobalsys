@@ -1,0 +1,71 @@
+﻿@model List<ThiagoLemos.Web.MVC.Models.EmpresaViewModel>
+
+@{
+    ViewBag.Title = "Empresas";
+}
+
+
+
+<h2 class="sub-header">@ViewBag.Title</h2>
+
+@{
+    if (!string.IsNullOrEmpty((string)TempData["Error"]))
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    if (!string.IsNullOrEmpty((string)TempData["Success"]))
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+}
+
+<div class="form-group">
+    <a href="@Url.Action("Create")"><button type="button" class="btn btn-primary">Novo</button></a>
+</div>
+
+<div class="container">
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr class="row">
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.First().Cnpj)
+                </th>
+                <th class="col-md-4">
+                    @Html.DisplayNameFor(model => model.First().Nome)
+                </th>
+                <th class="col-md-4">
+                    @Html.DisplayNameFor(model => model.First().RazaoSocial)
+                </th>
+
+
+                <th class="col-md-2">
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr class="row">
+                    <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.Cnpj)
+                    </td>
+                    <td class="col-md-4">
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td class="col-md-4" for="Validade CNH">
+                        @Html.DisplayFor(modelItem => item.RazaoSocial)
+                    </td>
+
+                    <td class="col-md-2">
+                        <a href="@Url.Action("Edit", new { id = item.Id })"><img src="../../Images/edit.png" title="Editar" /></a>
+                        <a href="@Url.Action("Delete", new { id = item.Id })" onclick=" return confirm('Deseja excluir o registro?'); "><img src="../../Images/delete.png" title="Excluir" /></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

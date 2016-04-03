@@ -1,0 +1,61 @@
+﻿@model ThiagoLemos.Web.MVC.Models.PessoaViewModel
+@{
+    ViewBag.Title = "Editar";
+}
+
+<div class="innerpage">
+
+    <h2 class="sub-header">@ViewBag.Title</h2>
+
+    @{
+        string valor = (string)TempData["Error"];
+        if (!string.IsNullOrEmpty(valor))
+        {
+            <div class="alert alert-danger">@TempData["Error"]</div>
+        }
+    }
+
+    @using (Html.BeginForm("Edit", "Pessoa", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="Cpf">Cpf:</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Cpf, new { @class = "form-control MaskCPF" })
+                @Html.ValidationMessageFor(model => model.Cpf)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="Nome">Nome:</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Nome, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="DataNascimento">Data Nascimento:</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.DataNascimento, "{0:dd/MM/yyyy}", new {@class = "form-control MaskData"})
+                @Html.ValidationMessageFor(model => model.DataNascimento)
+            </div>
+        </div>
+        
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DataCadastro)
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn  btn-primary">Alterar</button>
+            </div>
+        </div>
+    }
+
+    <div>
+        <a href="@Url.Action("Index")" class="btn btn-lg btn-link">Voltar</a>
+    </div>
+</div>

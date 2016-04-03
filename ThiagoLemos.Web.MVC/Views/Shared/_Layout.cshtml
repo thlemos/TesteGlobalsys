@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    
+        @Scripts.Render("~/bundles/jquery")
+
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    
+    
+    <script>
+    $(function () {
+        jQuery(function ($) {
+            
+            $("#Telefone").mask("9999999999?9"); //ddd incluso: aceita 8 ou 9 dígitos
+            $(".MaskData").mask("99/99/9999");
+            $(".MaskCPF").mask("999.999.999-99");
+            $(".MaskCNPJ").mask("99.999.999/9999-99");
+
+
+            $.mask.definitions['d'] = '[0-9,]';
+            $(".MaskDouble").mask('9?dddddddd', { placeholder: '  ' });
+
+            
+
+
+        });
+
+        //$(".alert-success").fadeTo(2000, 500).slideUp(2000, function () {
+        //});
+
+        //          setTimeout(function () {
+        //              $(".alert-success").hide('blind', {}, 500);
+        //          }, 2000);
+    });
+    </script>
+
+
+
+</head>
+<body>
+    @Html.Partial("_MenuSuperior")
+    <div class="container">
+        @*<main class="col-sm-8">
+            @RenderBody()
+        </main>*@
+
+        @RenderSection("featured", required: false)
+        <div class="container">
+            @RenderBody()    
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+@*<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Pessoa", "Index", "Pessoa")</li>
+                            <li>@Html.ActionLink("Empresa", "Index", "Empresa")</li>
+                            <li>@Html.ActionLink("Colaborador", "Index", "Colaborador")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>*@
